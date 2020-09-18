@@ -19,14 +19,18 @@ configVars:
   DRUID_USE_CONTAINER_IP: "true"
 
   ## Druid Common Configurations. ref: https://druid.apache.org/docs/latest/configuration/index.html#common-configurations
-  druid_extensions_loadList: '["druid-histogram", "druid-datasketches", "druid-lookups-cached-global", "postgresql-metadata-storage"]'
+  druid_extensions_loadList: '["druid-parquet-extensions", "druid-avro-extensions", "druid-stats", "druid-kafka-indexing-service", "druid-hdfs-storage", "druid-histogram", "druid-datasketches", "druid-lookups-cached-global", "postgresql-metadata-storage"]'
   druid_metadata_storage_type: postgresql
   druid_metadata_storage_connector_connectURI: jdbc:postgresql://postgres:5432/druid
   druid_metadata_storage_connector_user: druid
   druid_metadata_storage_connector_password: druid
-  druid_storage_type: local
+  druid_storage_type: hdfs
+  druid_storage_storageDirectory: hdfs://192.168.122.1:9000/var/druid/data
+  #druid_storage_storageDirectory: hdfs://10.245.169.241:8890/var/druid/data
+  #druid_hadoop_security_kerberos_principal: t1_edo_npk_ex_druid@NONPROD.DATALAKE
+  #druid_hadoop_security_kerberos_keytab: /etc/security/keytabs/
   druid_indexer_logs_type: file
-  druid_indexer_logs_directory: /opt/data/indexing-logs
+  druid_indexer_logs_directory: hdfs://192.168.122.1:9000/var/druid/data/indexing-logs
 
   ## Druid Emitting Metrics. ref: https://druid.apache.org/docs/latest/configuration/index.html#emitting-metrics
   druid_emitter: noop
@@ -178,7 +182,7 @@ historical:
     druid_processing_numMergeBuffers: 2
     druid_processing_numThreads: 1
     # druid_monitoring_monitors: '["org.apache.druid.client.cache.CacheMonitor", "org.apache.druid.server.metrics.HistoricalMetricsMonitor", "org.apache.druid.server.metrics.QueryCountStatsMonitor"]'
-    # druid_segmentCache_locations: '[{"path":"/var/druid/segment-cache","maxSize":300000000000}]'
+    druid_segmentCache_locations: '[{"path":"hdfs://192.168.122.1:9000/var/druid/data/segment-cache","maxSize":300000000000}]'
 
   ingress:
     enabled: false
