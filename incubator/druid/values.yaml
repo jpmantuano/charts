@@ -26,8 +26,7 @@ configVars:
   druid_metadata_storage_connector_password: druid
   druid_storage_type: hdfs
   druid_storage_storageDirectory: hdfs://192.168.122.1:9000/var/druid/data
-  #druid_storage_storageDirectory: hdfs://10.245.169.241:8890/var/druid/data
-  #druid_hadoop_security_kerberos_principal: t1_edo_npk_ex_druid@NONPROD.DATALAKE
+  #druid_hadoop_security_kerberos_principal: user@NONPROD.DATALAKE
   #druid_hadoop_security_kerberos_keytab: /etc/security/keytabs/
   druid_indexer_logs_type: file
   druid_indexer_logs_directory: hdfs://192.168.122.1:9000/var/druid/data/indexing-logs
